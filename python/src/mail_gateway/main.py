@@ -387,6 +387,24 @@ _LANDING_HTML = """\
     </div>
   </div>
 
+  <div class="how-it-works" style="margin-top: 30px;">
+    <h2>Install</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <p>In your ship's dojo, run: <code>|install ~dister-poster-midnev %mail</code></p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <p>Open <strong>/mail</strong> in your ship's browser &mdash; that's it</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <p>Your email address is <strong>~your-ship@{{domain}}</strong>. Add it as PWA to your phone for push notifications.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="footer">
     <p>Powered by <a href="https://urbit.org">Urbit</a> &middot; <a href="https://github.com/rolrup/mail">Source</a></p>
     <p style="font-size: 11px; margin-top: 4px;">Web Push: <a href="https://github.com/will-hanlen/urbit-web-push">urbit-web-push</a> by ~migrev-dolseg</p>
