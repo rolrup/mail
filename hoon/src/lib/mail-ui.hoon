@@ -1,8 +1,8 @@
 /-  *mail-client
 /-  *mail-gateway
 |%
-++  build-version  "500"
-++  full-version   "v0.5.0-500"
+++  build-version  "501"
+++  full-version   "v0.5.0-501"
 ::  wei-to-eth-display: convert wei to ETH string with 9 decimals
 ::  format: 0.xxxxyyyyy (4 price digits + 5 random digits)
 ::
@@ -119,7 +119,11 @@
   |=  lab=(set @tas)
   ^-  (list manx)
   ?:  =(~ lab)  ~
-  %+  turn  ~(tap in lab)
+  =/  visible=(list @tas)
+    %+  skim  ~(tap in lab)
+    |=  l=@tas
+    !=("sendas:" (scag 7 (trip l)))
+  %+  turn  visible
   |=  l=@tas
   ;span(class "label-badge"): {(trip l)}
 ::  render-body: simple text wrapper, markdown handled by JS
@@ -850,6 +854,7 @@
             ;input(type "checkbox", id "select-all", title "Select all");
           ==
           ;th(class "col-status"): Status
+          ;th(class "col-narrow");
           ;th(class "col-to"): To
           ;th: Subject
           ;th(class "col-labels"): Labels
