@@ -1,0 +1,9 @@
+services:
+  mail-gateway:
+    build: .
+    ports:
+      - "8443:8443"
+    env_file:
+      - .env
+    restart: unless-stopped
+    network_mode: host  # needed to reach local urbit ship

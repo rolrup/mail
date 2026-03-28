@@ -1,0 +1,130 @@
+;>
+# Configuration
+
+## Gateway setup
+
+To send and receive email from external addresses, you need a trusted gateway ship running %mail-gateway.
+
+### Add a gateway
+
+In Settings page or dojo:
+
+```
+:mail-client &mail-action [%add-gateway ~mister-poster-midnev]
+```
+
+The gateway must approve your ship. Some gateways auto-approve.
+
+### Your email address
+
+Once the gateway has a domain configured, your address is:
+
+```
+shipname@gateway-domain
+```
+
+Find it in Settings. Use dot-notation for labels: `shipname.label@domain`.
+
+### How it works
+
+- *Outgoing*: message forwarded to gateway, relayed via SMTP
+- *Incoming*: gateway receives email, delivers to your ship via Ames
+- *Ship-to-ship*: direct via Ames, no gateway needed
+
+## Comets
+
+Comets (128-bit ship names like ~doznec-rallod-...) have restricted functionality:
+
+- Cannot send messages
+- Cannot access gateways (no external email)
+- Cannot register or purchase aliases
+- Cannot run a gateway
+- Can only receive internal Urbit mail from other ships
+
+These restrictions exist because comets are anonymous and free to create, making them unsuitable as verified senders or gateway operators.
+
+To unlock full email functionality, use a planet, star, or galaxy.
+
+## Delivery status
+
+After sending, messages show a delivery status in the Sent page:
+
+- **sending** — dispatched, waiting for delivery confirmation
+- **sent** — delivered to the recipient's ship
+- **failed** — delivery timed out (5 min) or was rejected
+
+If a recipient's ship is offline, the message stays as "sending". When the ship comes back online, the message is delivered and the status updates to "sent" automatically. Urbit's Ames protocol retries indefinitely.
+
+## Email aliases
+
+Aliases let you use a custom name instead of your ship name in your email address.
+
+### Free aliases
+
+Aliases of 10+ characters are free (up to 5 per ship). Request in Settings > Aliases tab.
+
+### Paid aliases (ETH)
+
+Shorter aliases require ETH payment. Price doubles for each character shorter. Purchase flow:
+
+1. Go to Settings > Aliases tab and enter desired alias
+2. If the alias requires payment, you are redirected to the payment page with price estimate
+3. QR code + wallet address shown — pay exact amount from any ETH wallet
+4. Enter transaction hash — gateway verifies on-chain (at least 3 confirmations)
+5. Alias activated automatically
+
+### Invite aliases
+
+Gateway operators can generate invite codes for specific aliases. Redeem in Settings > Aliases tab with the invite code.
+
+## Backup and restore
+
+Backup downloads all mail data (inbox, sent, trash, settings) as a JSON file. Restore uploads a JSON backup and replaces current state.
+
+Access via Settings > Account tab or `/mail/backup`.
+
+## Forwarding rules
+
+Forward incoming mail to other ships or email addresses. Configure in Settings > Forwarding.
+
+- Forward all mail or filter by label
+- Multiple rules supported (forward to several destinations)
+- Loop protection: relayed messages are not forwarded again
+- Forwarded messages include original headers in body
+
+## Push notifications
+
+Web Push notifications for new mail. Configure in Settings.
+
+Requires HTTPS. On iOS, install as PWA first (Safari > Share > Add to Home Screen).
+
+Separate agent `%mail-push` handles push delivery. Subscribes to mail-client updates automatically.
+
+## Subscriptions
+
+The agent publishes updates on `/updates`:
+
+- `%new-mail` - new message received
+- `%status-change` - message marked read/unread
+- `%deleted` - message moved to trash
+- `%sent` - message sent
+- `%send-failed` - delivery failure
+- `%labels-changed` - labels added/removed
+
+## Gateway admin
+
+If your ship runs %mail-gateway, the Gateway page (`/mail/gateway`) shows:
+
+### Ships tab
+- Whitelist management (approve/reject/remove ships)
+- Auto-approve toggle for new ships
+- Usage stats per ship (in/out counts)
+- Public/private gateway toggle
+
+### Aliases tab
+- Alias management (block/unblock/unreserve)
+- Alias configuration (min length, free limit)
+- Payment configuration (wallet, base price, Etherscan API key)
+- Pending payments with TTL countdown timers
+- Invite code generation for reserved aliases
+- Domain and DNS verification

@@ -1,0 +1,11 @@
+:~
+  title+'Mail'
+  info+'Sovereign email for Urbit. Send and receive mail to any address — Gmail, Protonmail, or another ship. Custom aliases, labels, forwarding rules, and push notifications. Install as PWA on your phone for a native app experience.'
+  color+0x4b.6cb7
+  version+[0 5 0]
+  website+'https://urmail.me'
+  license+'MIT'
+  image+'/mail/img/tile'
+  base+'mail'
+  site+/mail
+==

@@ -1,0 +1,37 @@
+;>
+# Urbit Mail Client
+
+%mail-client lets you send and receive email on your Urbit ship.
+
+- Ship-to-ship mail via Ames (direct, no gateway needed)
+- External email via a trusted gateway ship
+- Email aliases (free, paid with ETH, invite-based)
+- Labels with dot-notation in email addresses
+- Automatic mail forwarding between ships
+- Batch operations (select multiple, mark read/delete)
+- Backup and restore mail data as JSON
+- Web Push notifications (iOS PWA + desktop)
+- PWA installable app with offline icon
+- Dark/light theme with system preference detection
+
+## Getting started
+
+After installing %mail-client, open the web UI:
+
+```
+https://your-ship/mail
+```
+
+Or use CLI generators in dojo:
+
+```
++mail-client!mail/inbox
++mail-client!mail/sent
++mail-client!mail/unread
+```
+
+## Sections
+
+- [Web Interface](/docs/mail-client/web) - browser-based email
+- [CLI Reference](/docs/mail-client/cli) - dojo commands
+- [Configuration](/docs/mail-client/config) - gateway, forwarding, push setup

@@ -1,0 +1,69 @@
+;>
+# CLI Reference
+
+All CLI commands run in dojo. Use `!` syntax to run generators from any prompt:
+
+## Reading mail
+
+```
++mail-client!mail/inbox        Inbox messages (sorted by date, with unread count)
++mail-client!mail/sent         Sent messages
++mail-client!mail/read <@uv>   Full message by ID
++mail-client!mail/unread       Unread message count
++mail-client!mail/labels       All labels with counts
+```
+
+## Sending mail
+
+**Note:** Comets cannot send messages, access gateways, register aliases, or run a gateway. Only planets, stars, and galaxies have full functionality.
+
+To an Urbit ship (direct via Ames):
+
+```
+:mail-client &mail-action [%send [%urbit ~sampel-palnet] ~ ~ 'Subject' 'Body']
+```
+
+To an email address (via gateway):
+
+```
+:mail-client &mail-action [%send [%ext 'user@example.com'] ~ ~ 'Subject' 'Body']
+```
+
+With CC and BCC:
+
+```
+:mail-client &mail-action [%send [%urbit ~bus] ~[[%urbit ~zod]] ~[[%ext 'bcc@mail.com']] 'Subject' 'Body']
+```
+
+## Managing mail
+
+```
+:mail-client &mail-action [%mark-read 0v1.abc...]
+:mail-client &mail-action [%mark-unread 0v1.abc...]
+:mail-client &mail-action [%delete 0v1.abc...]
+:mail-client &mail-action [%add-label 0v1.abc... %important]
+:mail-client &mail-action [%remove-label 0v1.abc... %important]
+```
+
+## Gateway management
+
+```
+:mail-client &mail-action [%add-gateway ~mister-poster-midnev]
+:mail-client &mail-action [%remove-gateway ~mister-poster-midnev]
+:mail-client &mail-action [%set-gateway ~mister-poster-midnev]
+```
+
+## Debug
+
+```
+:mail-client +dbug [%state '']
+```
+
+## Scry endpoints
+
+```
+.^(inbox %gx /=mail-client=/inbox/noun)
+.^(sent %gx /=mail-client=/sent/noun)
+.^(@ud %gx /=mail-client=/unread-count/noun)
+.^((unit @p) %gx /=mail-client=/gateway/noun)
+```

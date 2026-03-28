@@ -1,0 +1,56 @@
+;>
+# Web Interface
+
+The mail client provides a browser-based interface at `/mail`. You must be logged into your ship to access it.
+
+## Pages
+
+```
+/mail              Inbox
+/mail/sent         Sent messages
+/mail/compose      Write a new message
+/mail/read?id=X    Read message by ID
+/mail/settings     Gateway, aliases, forwarding configuration
+/mail/buy-alias    Purchase a short alias with ETH
+/mail/gateway      Gateway admin (if enabled)
+/mail/backup       Backup and restore mail data
+/mail/help         Getting started guide
+/mail/donate       Support the project
+```
+
+## Inbox
+
+Messages sorted by date (newest first). Unread shown with `*` indicator. Sortable by date column. Sidebar with label filters.
+
+Features:
+- Click row to open message
+- Click address to search by sender
+- Delete button (x) on each row with confirmation
+- Search by subject/from/body
+- Pagination (25 per page)
+- Batch select: mark read/unread, delete multiple
+- Auto-refresh every 30 seconds (ETag-based, efficient)
+
+## Reading a message
+
+Shows sender, recipient, CC, date, labels, and message body. Markdown rendered (headings, bold, lists, blockquotes, links). Images hidden by default (Show/Hide toggle). View source for raw text.
+
+Actions: Reply, Reply All, Forward, Mark Read/Unread, Delete, Back.
+
+## Composing
+
+Fields: To, CC/BCC (expandable), Subject, Body. Gateway selector if multiple domains configured. Auto-save drafts to localStorage.
+
+## Labels
+
+Organize mail with labels. Add from message view. Filter by label in sidebar. Labels colored automatically by name hash.
+
+Dot-notation: use `shipname.label@domain` to auto-tag incoming mail. Multiple labels: `shipname.shop.receipts@domain`.
+
+## Dark/Light theme
+
+Toggle with sun/moon icon in navbar. Saved to localStorage. Auto-detects system preference.
+
+## PWA
+
+Install as standalone app: Chrome menu > Install. iPhone: Safari > Share > Add to Home Screen. Push notifications work from PWA.

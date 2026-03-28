@@ -1,0 +1,17 @@
+{
+  "name": "mail-gateway-worker",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "deploy:urmail-me": "wrangler deploy -c wrangler.urmail-me.toml",
+    "deploy:urpo-st": "wrangler deploy -c wrangler.urpo-st.toml",
+    "deploy:urbitmail-net": "wrangler deploy -c wrangler.urbitmail-net.toml",
+    "deploy:all": "npm run deploy:urmail-me && npm run deploy:urpo-st && npm run deploy:urbitmail-net",
+    "dev": "wrangler dev"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240909.0",
+    "typescript": "^5.5.0",
+    "wrangler": "^4.75.0"
+  }
+}
