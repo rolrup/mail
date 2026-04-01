@@ -115,6 +115,11 @@ async def start_outbound_listener(eyre: EyreClient, settings: Settings) -> None:
 
             to_addr = to["ext"]
 
+            # Block outbound to own domain — would create email loop
+            if settings.mail_domain and to_addr.endswith(f"@{settings.mail_domain}"):
+                log.warning("outbound.loop_blocked", to=to_addr, domain=settings.mail_domain)
+                continue
+
             # Outbound rate limit — prevent abuse via email API
             outbound_limiter = get_outbound_rate_limiter()
             from_ship = from_.get("urbit", "unknown")

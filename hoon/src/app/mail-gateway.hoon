@@ -282,7 +282,7 @@
       :~  [%pass /relay/(scot %uv id.msg) %agent [owner.u.alias-ent %mail-client] %poke %mail-action !>(act)]
       ==
     ::  not an alias — queue for bridge as outbound
-    ~&  >  'mail-gateway: queuing outbound {<id.msg>} for bridge'
+    ~&  >  'mail-gateway: queuing outbound for bridge'
     :_  this(pending (~(put in pending) id.msg), out-log [now.bowl (scag 3.000 (skim out-log |=(d=@da (gth d (sub now.bowl ~d30)))))])
     :~  [%give %fact ~[/outbound] %mail-message !>(msg)]
     ==

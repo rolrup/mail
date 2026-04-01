@@ -1,8 +1,8 @@
 /-  *mail-client
 /-  *mail-gateway
 |%
-++  build-version  "501"
-++  full-version   "v0.5.0-501"
+++  build-version  "502"
+++  full-version   "v0.5.0-502"
 ::  wei-to-eth-display: convert wei to ETH string with 9 decimals
 ::  format: 0.xxxxyyyyy (4 price digits + 5 random digits)
 ::

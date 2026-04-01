@@ -3,17 +3,7 @@ import uuid
 from datetime import datetime, timezone
 
 from pydantic import BaseModel, Field, field_validator
-
-# Valid @p patterns by length:
-# galaxy: ~XXX (3 chars), star: ~XXXXXX (6), planet: ~XXXXXX-XXXXXX (13), moon: 27
-_PATP_RE = re.compile(
-    r"^~("
-    r"[a-z]{3}"                                    # galaxy: 3 chars
-    r"|[a-z]{6}"                                   # star: 6 chars
-    r"|[a-z]{6}-[a-z]{6}"                          # planet: 13 chars
-    r"|[a-z]{6}-[a-z]{6}-[a-z]{6}-[a-z]{6}"        # moon: 27 chars
-    r")$"
-)
+from urbitob import is_valid_patp
 _LABEL_RE = re.compile(r"^[a-z][a-z0-9-]*$")
 
 
@@ -48,7 +38,7 @@ def parse_recipient_with_labels(to: str) -> tuple[str, list[str], bool]:
     ship = parts[0]
     labels = parts[1:]
 
-    if _PATP_RE.match(ship):
+    if is_valid_patp(ship):
         # valid @p — normal ship address
         valid_labels = []
         for label in labels:

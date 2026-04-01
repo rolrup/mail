@@ -134,6 +134,25 @@
     |^
     =+  !<([req-id=@ta req=inbound-request:eyre] vase)
     =/  url  (parse-request-line:server url.request.req)
+    ::  auth gate: allow static assets without login, require auth for everything else
+    ::
+    ?.  authenticated.req
+      =/  public=?
+        ?+  site.url  %.n
+          [%mail %manifest ~]          %.y
+          [%mail %sw ~]                %.y
+          [%mail %icon-192 ~]          %.y
+          [%mail %icon-512 ~]          %.y
+          [%mail %apple-touch-icon ~]  %.y
+          [%mail %apple-icon ~]        %.y
+          [%mail %favicon-32 ~]        %.y
+          [%mail %img %tile ~]         %.y
+        ==
+      ?:  public
+        (handle-get req-id url header-list.request.req)
+      :_  this
+      %+  give-simple-payload:app:server  req-id
+      [[303 ~[['location' '/~/login?redirect=/mail']]] ~]
     ?+  method.request.req  (give-405 req-id)
         %'GET'   (handle-get req-id url header-list.request.req)
         %'POST'  (handle-post req-id url body.request.req)
